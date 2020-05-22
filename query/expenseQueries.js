@@ -34,6 +34,11 @@ exports.updateExpense = (data) => {
   return string;
 };
 
+exports.deleteExpense = (data) => {
+  const keys = Object.keys(data);
+  return `DELETE FROM ${tableName} WHERE ${keys[0]}='${data.id}'`;
+};
+
 exports.getExpense = (id) => {
   return `SELECT * FROM ${tableName} WHERE id='${id}'`;
 };

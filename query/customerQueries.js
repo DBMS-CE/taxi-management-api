@@ -19,6 +19,11 @@ exports.getAll = () => {
   return `SELECT * FROM ${tableName}`;
 };
 
+exports.deleteCustomer = (data) => {
+  const keys = Object.keys(data);
+  return `DELETE FROM ${tableName} WHERE ${keys[0]}='${data.id}'`;
+};
+
 exports.updateCustomer = (data) => {
   const keys = Object.keys(data);
 

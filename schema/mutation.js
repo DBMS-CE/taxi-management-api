@@ -10,6 +10,7 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLNonNull,
+  GraphQLID,
 } = graphql;
 
 const connection = require("../mysql");
@@ -239,6 +240,76 @@ const Mutation = new GraphQLObjectType({
         try {
           const data = await connection(taxiQueries.updateTaxi(args));
           return data;
+        } catch (er) {
+          console.log(er);
+        }
+      },
+    },
+    deleteCustomer: {
+      type: objectType.CustomerType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        try {
+          await connection(customerQueries.deleteCustomer(args));
+          await connection(orderQueries.deleteOrder({ customerid: args.id }));
+        } catch (er) {
+          console.log(er);
+        }
+      },
+    },
+    deleteExpense: {
+      type: objectType.ExpenseType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        try {
+          await connection(expenseQueries.deleteExpense(args));
+        } catch (er) {
+          console.log(er);
+        }
+      },
+    },
+    deleteTaxi: {
+      type: objectType.TaxiType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        try {
+          await connection(taxiQueries.deleteTaxi(args));
+        } catch (er) {
+          console.log(er);
+        }
+      },
+    },
+    deleteDriver: {
+      type: objectType.DriverType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        try {
+          await connection(
+            `UPDATE taxitbl SET driverid=${null} WHERE driverid='${args.id}'`
+          );
+          await connection(driverQueries.deleteDriver(args));
+        } catch (er) {
+          console.log(er);
+        }
+      },
+    },
+    deleteOwner: {
+      type: objectType.OwnerType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        try {
+          await connection(ownerQueries.deleteOwner(args));
+          await connection(taxiQueries.deleteTaxi({ ownerid: args.id }));
         } catch (er) {
           console.log(er);
         }

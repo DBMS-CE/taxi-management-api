@@ -19,6 +19,11 @@ exports.getAll = () => {
   return `SELECT * FROM ${tableName}`;
 };
 
+exports.deleteOwner = (data) => {
+  const keys = Object.keys(data);
+  return `DELETE FROM ${tableName} WHERE ${keys[0]}='${data.ownerid}'`;
+};
+
 exports.updateOwner = (data) => {
   const keys = Object.keys(data);
 

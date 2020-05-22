@@ -19,6 +19,11 @@ exports.getAll = () => {
   return `SELECT * FROM ${tableName}`;
 };
 
+exports.deleteOrder = (data) => {
+  const keys = Object.keys(data);
+  return `DELETE FROM ${tableName} WHERE ${keys[0]}='${data.id}'`;
+};
+
 exports.updateOrder = (data) => {
   const keys = Object.keys(data);
 

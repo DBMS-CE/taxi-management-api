@@ -27,6 +27,11 @@ exports.getAll = () => {
   return `SELECT * FROM ${tableName}`;
 };
 
+exports.deleteTaxi = (data) => {
+  const keys = Object.keys(data);
+  return `DELETE FROM ${tableName} WHERE ${keys[0]}='${data.id}'`;
+};
+
 exports.updateTaxi = (data) => {
   const keys = Object.keys(data);
 
