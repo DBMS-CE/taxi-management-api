@@ -2,7 +2,7 @@
 
 An api for taxi management.
 
-Doc also hosted in github here: https://github.com/DBMS-CE/taxi-management-api/blob/master/taximanagement.pdf
+Doc also hosted in github here: https://github.com/DBMS-CE/taxi-management-api/blob/master/RDBMS PROJECT (1).docx
 
 ## Description
 
